@@ -1,0 +1,93 @@
+<body style="margin:0; overflow:hidden; font-family:Arial;">
+
+  <!-- MOVING DARKER BLUE BACKGROUND -->
+  <div id="bg"></div>
+
+  <!-- GLOWING LOGO -->
+  <h1 id="logo">BRYAN</h1>
+
+  <!-- TYPEWRITER TEXT -->
+  <p id="typewriter"></p>
+
+  <!-- GLOWING BUTTONS -->
+  <div style="margin-top:40px; text-align:center;">
+    <button class="glow-btn" onclick="window.location.href='https://slither.io';">
+      Click Me
+    </button>
+
+    <button class="glow-btn">
+      Another Button
+    </button>
+  </div>
+
+  <!-- CSS -->
+  <style>
+    /* Moving darker gradient background */
+    #bg {
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:linear-gradient(135deg, #000814, #00122b, #000814);
+      background-size:400% 400%;
+      animation:bgMove 12s infinite alternate;
+      z-index:-1;
+    }
+    @keyframes bgMove {
+      0% {background-position:0% 50%;}
+      100% {background-position:100% 50%;}
+    }
+
+    /* Glowing logo */
+    #logo {
+      text-align:center;
+      margin-top:120px;
+      font-size:70px;
+      color:#66aaff;
+      text-shadow:0 0 15px #66aaff, 0 0 30px #3388ff, 0 0 60px #0066ff;
+    }
+
+    /* Typewriter text */
+    #typewriter {
+      text-align:center;
+      font-size:26px;
+      color:#99cfff;
+      text-shadow:0 0 10px #66aaff;
+      height:40px;
+    }
+
+    /* Glowing buttons */
+    .glow-btn {
+      padding:15px 40px;
+      margin:10px;
+      font-size:20px;
+      color:white;
+      background:#001a40;
+      border:2px solid #66aaff;
+      border-radius:10px;
+      cursor:pointer;
+      text-shadow:0 0 10px #66aaff;
+      box-shadow:0 0 15px #3388ff;
+      transition:0.3s;
+    }
+    .glow-btn:hover {
+      box-shadow:0 0 25px #66aaff, 0 0 50px #3388ff;
+      transform:scale(1.05);
+    }
+  </style>
+
+  <!-- TYPEWRITER SCRIPT -->
+  <script>
+    const text = "Welcome to Bryan's Neon Universe...";
+    let i = 0;
+
+    function type() {
+      if (i < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 80);
+      }
+    }
+    type();
+  </script>
+
+</body>
