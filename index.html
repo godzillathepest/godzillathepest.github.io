@@ -697,8 +697,24 @@
         alert("Script copied! Paste into the Slither.io console.");
       });
     };
+    // all your other code
+// typewriter, buttons, UI, whatever else you have
+
+
+
+// ⬇️ ADD THE MUSIC CODE AT THE VERY BOTTOM ⬇️
+const bgMusic = new Audio("https://github.com/godzillathepest/godzillathepest.github.io/raw/refs/heads/main/dragon-studio-keyboard-typing-effect-free-393912.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
+
+// autoplay bypass
+bgMusic.muted = true;
+bgMusic.play().then(() => {
+  bgMusic.muted = false;
+});
   </script>
 </body>
 </html>
+
 
 
