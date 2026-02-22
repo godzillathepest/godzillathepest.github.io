@@ -619,6 +619,11 @@
 
   console.log("Bryan Fake Client loaded: UI-only, client-side, no game modification.");
 })();
+    document.addEventListener("click", e => {
+  if (e.target.classList.contains("bryan_chip")) {
+    new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg").play();
+  }
+});
   </script>
 
   <script>
@@ -695,4 +700,5 @@
   </script>
 </body>
 </html>
+
 
