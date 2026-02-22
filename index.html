@@ -1,93 +1,697 @@
-<body style="margin:0; overflow:hidden; font-family:Arial;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BEST SLITHER.IO MODS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- MOVING DARKER BLUE BACKGROUND -->
-  <div id="bg"></div>
-
-  <!-- GLOWING LOGO -->
-  <h1 id="logo">BRYAN</h1>
-
-  <!-- TYPEWRITER TEXT -->
-  <p id="typewriter"></p>
-
-  <!-- GLOWING BUTTONS -->
-  <div style="margin-top:40px; text-align:center;">
-    <button class="glow-btn" onclick="window.location.href='https://slither.io';">
-      Click Me
-    </button>
-
-    <button class="glow-btn">
-      Another Button
-    </button>
-  </div>
-
-  <!-- CSS -->
   <style>
-    /* Moving darker gradient background */
-    #bg {
-      position:fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background:linear-gradient(135deg, #000814, #00122b, #000814);
-      background-size:400% 400%;
-      animation:bgMove 12s infinite alternate;
-      z-index:-1;
-    }
-    @keyframes bgMove {
-      0% {background-position:0% 50%;}
-      100% {background-position:100% 50%;}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #000 !important;
+      color: #cfe8ff;
+      overflow: hidden;
     }
 
-    /* Glowing logo */
-    #logo {
-      text-align:center;
-      margin-top:120px;
-      font-size:70px;
-      color:#66aaff;
-      text-shadow:0 0 15px #66aaff, 0 0 30px #3388ff, 0 0 60px #0066ff;
+    .frame {
+      position: absolute;
+      inset: 30px;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 180, 255, 0.4);
+      box-shadow: 0 0 25px rgba(0, 180, 255, 0.35),
+                  inset 0 0 25px rgba(0, 60, 120, 0.6);
+      background: transparent !important;
+      overflow: hidden;
     }
 
-    /* Typewriter text */
-    #typewriter {
-      text-align:center;
-      font-size:26px;
-      color:#99cfff;
-      text-shadow:0 0 10px #66aaff;
-      height:40px;
+    #particles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent !important;
+      z-index: 0;
     }
 
-    /* Glowing buttons */
-    .glow-btn {
-      padding:15px 40px;
-      margin:10px;
-      font-size:20px;
-      color:white;
-      background:#001a40;
-      border:2px solid #66aaff;
-      border-radius:10px;
-      cursor:pointer;
-      text-shadow:0 0 10px #66aaff;
-      box-shadow:0 0 15px #3388ff;
-      transition:0.3s;
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .glow-btn:hover {
-      box-shadow:0 0 25px #66aaff, 0 0 50px #3388ff;
-      transform:scale(1.05);
+
+    .hud-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #7fb7ff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hud-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 180, 255, 0.5);
+      background: rgba(0, 80, 140, 0.4);
+      box-shadow: 0 0 12px rgba(0, 180, 255, 0.5);
+    }
+
+    .center {
+      max-width: 720px;
+      margin-top: 40px;
+    }
+
+    .logo-main {
+      font-size: 32px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #8fd4ff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px #00e1ff, 0 0 30px #0077ff;
+    }
+
+    .headline {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #e5f3ff;
+    }
+
+    .typewriter {
+      font-size: 16px;
+      color: #9acbff;
+      min-height: 24px;
+      margin-bottom: 24px;
+      text-shadow: 0 0 8px rgba(0, 200, 255, 0.6);
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #7fa7d4;
+      max-width: 520px;
+      line-height: 1.6;
+      margin-bottom: 26px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 12px 26px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 999px;
+      border: 1px solid #00c8ff;
+      background: #003b66;
+      color: #e5f7ff;
+      box-shadow: 0 0 18px #00c8ff;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      border-color: #4fa0ff;
+      box-shadow: 0 0 12px #4fa0ff;
+      opacity: 0.9;
+    }
+
+    .trail-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, #00ffff, transparent);
+      opacity: 0.9;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      animation: trailFade 0.6s linear forwards;
+    }
+
+    @keyframes trailFade {
+      0% { opacity: 0.9; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.2); }
     }
   </style>
+</head>
 
-  <!-- TYPEWRITER SCRIPT -->
-  <script>
-    const text = "Welcome to Bryan's Neon Universe...";
-    let i = 0;
+<body>
+  <div class="frame">
+    <canvas id="particles"></canvas>
 
-    function type() {
-      if (i < text.length) {
-        document.getElementById("typewriter").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, 80);
+    <div class="content">
+      <div class="hud-top">
+        <div class="hud-pill">Slither Mod UI Hub</div>
+        <div>Status: ONLINE</div>
+      </div>
+
+      <div class="center">
+        <div class="logo-main">BEST SLITHER.IO MODS</div>
+
+        <div class="headline">Your personal neon control center.</div>
+        <div id="typewriter" class="typewriter"></div>
+
+        <p class="desc">
+          Launch Slither.io, copy your console script, and inject a custom neon mod menu with glow, theme, and button controls.
+        </p>
+
+        <div class="btn-row">
+          <button class="btn-primary" id="launchSlitherBtn">Launch Slither.io</button>
+          <button class="btn-secondary" id="copyCodeBtn">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⭐ PLACEHOLDER FOR THE REAL INJECTION SCRIPT ⭐ -->
+  <script id="injectScript" type="text/plain">
+    (function () {
+  if (window.__BRYAN_FAKE_CLIENT__) return;
+  window.__BRYAN_FAKE_CLIENT__ = true;
+
+  // ---------- Helpers ----------
+  function createStyle(css) {
+    const s = document.createElement("style");
+    s.textContent = css;
+    document.head.appendChild(s);
+    return s;
+  }
+
+  function makeDraggable(handle, target) {
+    let down = false, offX = 0, offY = 0;
+    handle.addEventListener("mousedown", e => {
+      down = true;
+      const r = target.getBoundingClientRect();
+      offX = e.clientX - r.left;
+      offY = e.clientY - r.top;
+      e.preventDefault();
+    });
+    document.addEventListener("mousemove", e => {
+      if (!down) return;
+      target.style.left = e.clientX - offX + "px";
+      target.style.top = e.clientY - offY + "px";
+    });
+    document.addEventListener("mouseup", () => down = false);
+  }
+
+  // ---------- Base styles ----------
+  createStyle(`
+    #bryan_open_btn {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid #00c8ff;
+      background: #001a33;
+      color: #e5f7ff;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 16px #00c8ff;
+      z-index: 999999;
+      animation: bryan_pulse 1.6s ease-in-out infinite;
+    }
+    #bryan_open_btn:hover {
+      background:#003b66;
+      box-shadow:0 0 22px #00c8ff;
+    }
+    @keyframes bryan_pulse {
+      0%,100% { transform: scale(1); box-shadow:0 0 14px #00c8ff; }
+      50% { transform: scale(1.05); box-shadow:0 0 24px #00e1ff; }
+    }
+
+    #bryan_panel {
+      position: fixed;
+      top: 80px;
+      left: 60px;
+      width: 420px;
+      background: #020716;
+      border-radius: 12px;
+      border: 1px solid #003b66;
+      box-shadow: 0 0 24px #003b66;
+      color: #cfe8ff;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      z-index: 1000000;
+      display: none;
+    }
+    #bryan_panel_hdr {
+      padding: 8px 10px;
+      background:#001326;
+      border-bottom:1px solid #003b66;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:move;
+    }
+    #bryan_panel_tabs {
+      display:flex;
+      gap:6px;
+      padding:8px 10px;
+      border-bottom:1px solid #003b66;
+    }
+    #bryan_panel_tabs button {
+      flex:1;
+      padding:6px 4px;
+      border-radius:6px;
+      border:1px solid #003b66;
+      background:#001326;
+      color:#cfe8ff;
+      cursor:pointer;
+      font-size:12px;
+      transition:background 0.2s, box-shadow 0.2s, transform 0.1s;
+    }
+    #bryan_panel_tabs button:hover {
+      background:#00264d;
+      box-shadow:0 0 10px #00c8ff;
+      transform:translateY(-1px);
+    }
+    #bryan_panel_tabs button.bryan_tab_active {
+      background:#003b66;
+      box-shadow:0 0 12px #00c8ff;
+    }
+    #bryan_panel_content {
+      padding:10px;
+      max-height:360px;
+      overflow-y:auto;
+    }
+    #bryan_panel_content h3 {
+      margin-bottom:6px;
+      font-size:14px;
+    }
+    #bryan_panel_content p {
+      margin-bottom:10px;
+      color:#7fa7d4;
+    }
+    #bryan_panel_content button.bryan_chip {
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid #003b66;
+      background:#001326;
+      color:#cfe8ff;
+      cursor:pointer;
+      font-size:12px;
+      margin:2px;
+      transition:background 0.2s, box-shadow 0.2s, transform 0.1s;
+    }
+    #bryan_panel_content button.bryan_chip:hover {
+      background:#003b66;
+      box-shadow:0 0 10px #00c8ff;
+      transform:translateY(-1px);
+    }
+
+    #bryan_settings {
+      position:fixed;
+      width:340px;
+      background:#020716;
+      border-radius:10px;
+      border:1px solid #003b66;
+      box-shadow:0 0 20px #003b66;
+      color:#cfe8ff;
+      font-family:Arial, sans-serif;
+      font-size:13px;
+      z-index:1000001;
+      display:none;
+    }
+    #bryan_settings_hdr {
+      padding:8px 10px;
+      background:#001326;
+      border-bottom:1px solid #003b66;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      cursor:move;
+    }
+    #bryan_settings_body {
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    #bryan_settings_body label {
+      font-size:12px;
+      color:#9acbff;
+    }
+    #bryan_settings_body input[type="color"] {
+      width:100%;
+      height:32px;
+      border-radius:6px;
+      border:1px solid #003b66;
+      background:#000814;
+    }
+  `);
+
+  // ---------- OPEN MENU button ----------
+  const openBtn = document.createElement("button");
+  openBtn.id = "bryan_open_btn";
+  openBtn.textContent = "OPEN MOD MENU";
+  document.body.appendChild(openBtn);
+
+  // ---------- Main panel ----------
+  const panel = document.createElement("div");
+  panel.id = "bryan_panel";
+  panel.innerHTML = `
+    <div id="bryan_panel_hdr">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-weight:bold;font-size:14px;color:#e5f7ff;">Bryan Client</span>
+        <span style="font-size:11px;color:#7fa7d4;">Fake Slither Mod UI</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button id="bryan_settings_btn" style="
+          width:26px;height:26px;border-radius:50%;
+          border:1px solid #003b66;background:#001a33;color:#cfe8ff;
+          cursor:pointer;display:flex;align-items:center;justify-content:center;
+        ">⚙</button>
+        <button id="bryan_panel_close" style="
+          padding:4px 8px;border-radius:6px;border:1px solid #003b66;
+          background:#001a33;color:#cfe8ff;cursor:pointer;
+        ">X</button>
+      </div>
+    </div>
+    <div id="bryan_panel_tabs">
+      <button data-tab="g" class="bryan_tab_active">Gameplay</button>
+      <button data-tab="v">Visuals</button>
+      <button data-tab="s">Server</button>
+      <button data-tab="b">Backgrounds</button>
+      <button data-tab="a">Admin</button>
+    </div>
+    <div id="bryan_panel_content"></div>
+  `;
+  document.body.appendChild(panel);
+
+  const hdr = panel.querySelector("#bryan_panel_hdr");
+  makeDraggable(hdr, panel);
+
+  // ---------- Settings panel ----------
+  const settings = document.createElement("div");
+  settings.id = "bryan_settings";
+  settings.innerHTML = `
+    <div id="bryan_settings_hdr">
+      <span>Settings</span>
+      <button id="bryan_settings_close" style="
+        padding:4px 8px;border-radius:6px;border:1px solid #003b66;
+        background:#001a33;color:#cfe8ff;cursor:pointer;
+      ">X</button>
+    </div>
+    <div id="bryan_settings_body">
+      <div>
+        <div style="font-weight:bold;margin-bottom:4px;">Glow Color</div>
+        <input type="color" id="bryan_glow_color" value="#00c8ff">
+      </div>
+      <div>
+        <div style="font-weight:bold;margin-bottom:4px;">Menu Background</div>
+        <input type="color" id="bryan_menu_color" value="#020716">
+      </div>
+      <div>
+        <div style="font-weight:bold;margin-bottom:4px;">Button Background</div>
+        <input type="color" id="bryan_btn_color" value="#001326">
+      </div>
+      <div>
+        <div style="font-weight:bold;margin-bottom:4px;">Fake Effects</div>
+        <label><input type="checkbox" checked> Pulsing Glow</label><br>
+        <label><input type="checkbox" checked> Breathing Border</label><br>
+        <label><input type="checkbox" checked> Slide-in Panel</label><br>
+        <label><input type="checkbox" checked> Hover Glow</label><br>
+        <label><input type="checkbox" checked> Active Tab Glow</label>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(settings);
+
+  const settingsHdr = settings.querySelector("#bryan_settings_hdr");
+  makeDraggable(settingsHdr, settings);
+
+  // ---------- Tabs content ----------
+  const content = panel.querySelector("#bryan_panel_content");
+  const tabs = panel.querySelectorAll("#bryan_panel_tabs button");
+
+  const pages = {
+    g: `
+      <h3>Gameplay</h3>
+      <p>All options here are fake and client-side only. They do not affect any real game.</p>
+      <button class="bryan_chip">Max Zoom (Fake)</button>
+      <button class="bryan_chip">Auto Skin (Fake)</button>
+      <button class="bryan_chip">Bot Lobby (Fake)</button>
+    `,
+    v: `
+      <h3>Visuals</h3>
+      <p>Toggle fake visual effects on this page only.</p>
+      <button class="bryan_chip">Neon Pulse</button>
+      <button class="bryan_chip">HUD Glow</button>
+      <button class="bryan_chip">Wireframe Mode</button>
+    `,
+    s: `
+      <h3>Server</h3>
+      <p>Fake server tools. These are just UI elements for fun.</p>
+      <button class="bryan_chip">Ping Overlay</button>
+      <button class="bryan_chip">Region Spoofer (Fake)</button>
+      <button class="bryan_chip">Match Finder (Fake)</button>
+    `,
+    b: `
+      <h3>Backgrounds</h3>
+      <p>Change the background of this page only.</p>
+      <div style="margin-bottom:8px;">
+        <button class="bryan_chip" data-bg="dark">Dark</button>
+        <button class="bryan_chip" data-bg="solid">Solid Blue</button>
+        <button class="bryan_chip" data-bg="grad">Gradient</button>
+        <button class="bryan_chip" data-bg="anim">Animated Gradient</button>
+        <button class="bryan_chip" data-bg="grid">Grid</button>
+        <button class="bryan_chip" data-bg="custom">Custom Image</button>
+      </div>
+      <div id="bryan_bg_custom_wrap" style="display:none;margin-top:6px;">
+        <input id="bryan_bg_custom_url" type="text" placeholder="Image URL..."
+          style="width:100%;padding:6px;border-radius:6px;border:1px solid #003b66;
+                 background:#000814;color:#e5f7ff;font-size:12px;">
+        <button id="bryan_bg_apply" class="bryan_chip" style="margin-top:6px;">Apply</button>
+      </div>
+    `,
+    a: `
+      <h3>Admin</h3>
+      <p>Fake admin controls. Nothing here affects any real account or server.</p>
+      <button class="bryan_chip">Force Leaderboard (Fake)</button>
+      <button class="bryan_chip">Shadow Mode (Fake)</button>
+      <button class="bryan_chip">Spectator Hub (Fake)</button>
+    `
+  };
+
+  function applyBackground(mode, url) {
+    const body = document.body;
+    const old = document.getElementById("__bryan_bg_style__");
+    if (old) old.remove();
+    body.style.backgroundImage = "";
+    body.style.backgroundSize = "";
+    body.style.backgroundRepeat = "";
+    body.style.animation = "";
+
+    if (mode === "dark") {
+      body.style.backgroundColor = "#000";
+    } else if (mode === "solid") {
+      body.style.backgroundColor = "#001a33";
+    } else if (mode === "grad") {
+      body.style.background = "linear-gradient(135deg,#001326,#003b66)";
+    } else if (mode === "anim") {
+      const s = createStyle(`
+        @keyframes bryan_bg_anim {
+          0% { background-position:0% 50%; }
+          100% { background-position:100% 50%; }
+        }
+        body {
+          background: linear-gradient(135deg,#000814,#003b66,#000814);
+          background-size:300% 300%;
+          animation:bryan_bg_anim 14s ease-in-out infinite;
+        }
+      `);
+      s.id = "__bryan_bg_style__";
+    } else if (mode === "grid") {
+      const s = createStyle(`
+        body {
+          background-color:#000;
+          background-image:
+            linear-gradient(#003b66 1px, transparent 1px),
+            linear-gradient(90deg,#003b66 1px, transparent 1px);
+          background-size:40px 40px;
+        }
+      `);
+      s.id = "__bryan_bg_style__";
+    } else if (mode === "custom" && url) {
+      body.style.backgroundImage = "url('" + url + "')";
+      body.style.backgroundSize = "cover";
+      body.style.backgroundRepeat = "no-repeat";
+    }
+  }
+
+  function loadTab(id) {
+    tabs.forEach(t => {
+      t.classList.toggle("bryan_tab_active", t.dataset.tab === id);
+    });
+    content.innerHTML = pages[id] || "<p>Empty.</p>";
+
+    if (id === "b") {
+      const chips = content.querySelectorAll("button.bryan_chip[data-bg]");
+      const wrap = content.querySelector("#bryan_bg_custom_wrap");
+      const urlInput = content.querySelector("#bryan_bg_custom_url");
+      const applyBtn = content.querySelector("#bryan_bg_apply");
+
+      chips.forEach(ch => {
+        ch.onclick = () => {
+          const mode = ch.dataset.bg;
+          if (mode === "custom") {
+            wrap.style.display = "block";
+          } else {
+            wrap.style.display = "none";
+            applyBackground(mode);
+          }
+        };
+      });
+
+      if (applyBtn && urlInput) {
+        applyBtn.onclick = () => {
+          const v = urlInput.value.trim();
+          if (v) applyBackground("custom", v);
+        };
       }
     }
-    type();
+  }
+
+  tabs.forEach(t => {
+    t.addEventListener("click", () => loadTab(t.dataset.tab));
+  });
+  loadTab("g");
+
+  // ---------- Settings wiring ----------
+  const settingsBtn = panel.querySelector("#bryan_settings_btn");
+  const settingsClose = settings.querySelector("#bryan_settings_close");
+  const glowInput = settings.querySelector("#bryan_glow_color");
+  const menuInput = settings.querySelector("#bryan_menu_color");
+  const btnInput = settings.querySelector("#bryan_btn_color");
+
+  settingsBtn.onclick = () => {
+    const r = panel.getBoundingClientRect();
+    settings.style.left = r.right + 10 + "px";
+    settings.style.top = r.top + "px";
+    settings.style.display = settings.style.display === "none" || !settings.style.display ? "block" : "none";
+  };
+  settingsClose.onclick = () => settings.style.display = "none";
+
+  glowInput.addEventListener("input", () => {
+    const c = glowInput.value;
+    panel.style.boxShadow = `0 0 24px ${c}`;
+    openBtn.style.boxShadow = `0 0 16px ${c}`;
+  });
+  menuInput.addEventListener("input", () => {
+    panel.style.background = menuInput.value;
+  });
+  btnInput.addEventListener("input", () => {
+    panel.querySelectorAll("#bryan_panel_tabs button").forEach(b => {
+      b.style.background = btnInput.value;
+    });
+  });
+
+  // ---------- Open/close wiring ----------
+  const closeBtn = panel.querySelector("#bryan_panel_close");
+  openBtn.onclick = () => {
+    panel.style.display = "block";
+  };
+  closeBtn.onclick = () => {
+    panel.style.display = "none";
+  };
+
+  // Center settings initially near panel
+  (function initSettingsPos() {
+    const r = panel.getBoundingClientRect();
+    settings.style.left = r.right + 10 + "px";
+    settings.style.top = r.top + "px";
+  })();
+
+  console.log("Bryan Fake Client loaded: UI-only, client-side, no game modification.");
+})();
   </script>
 
+  <script>
+    // Typewriter
+    const twText = "Loading fake clients, neon UI, and your custom control panel...";
+    let twIndex = 0;
+    function typeWriter() {
+      document.getElementById("typewriter").textContent = twText.slice(0, twIndex++);
+      if (twIndex <= twText.length) setTimeout(typeWriter, 45);
+    }
+    setTimeout(typeWriter, 400);
+
+    // Particles
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let w, h;
+
+    function resizeCanvas() {
+      w = canvas.width = canvas.offsetWidth;
+      h = canvas.height = canvas.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const particles = Array.from({ length: 80 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 2 + 1,
+      a: Math.random() * 0.6 + 0.2
+    }));
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#00e1ff";
+      particles.forEach(p => {
+        ctx.globalAlpha = p.a;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    // Mouse trail
+    window.addEventListener("mousemove", e => {
+      const d = document.createElement("div");
+      d.className = "trail-dot";
+      d.style.left = e.clientX + "px";
+      d.style.top = e.clientY + "px";
+      document.body.appendChild(d);
+      setTimeout(() => d.remove(), 600);
+    });
+
+    // Homepage buttons
+    document.getElementById("launchSlitherBtn").onclick = () => {
+      window.open("https://slither.io", "_blank");
+    };
+
+    document.getElementById("copyCodeBtn").onclick = () => {
+      const scriptContent = document.getElementById("injectScript").textContent.trim();
+      navigator.clipboard.writeText(scriptContent).then(() => {
+        alert("Script copied! Paste into the Slither.io console.");
+      });
+    };
+  </script>
 </body>
+</html>
