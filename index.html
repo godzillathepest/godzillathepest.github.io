@@ -1,199 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BEST SLITHER.IO Mod Menu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    /* --- YOUR ORIGINAL WEBSITE CSS - UNTOUCHED --- */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #000 !important; color: #cfe8ff; overflow: hidden; }
-    .frame { position: absolute; inset: 30px; border-radius: 18px; border: 1px solid rgba(0, 180, 255, 0.4); box-shadow: 0 0 25px rgba(0, 180, 255, 0.35), inset 0 0 25px rgba(0, 60, 120, 0.6); background: transparent !important; overflow: hidden; }
-    #particles { position: absolute; inset: 0; width: 100%; height: 100%; background: transparent !important; z-index: 0; }
-    .content { position: relative; z-index: 2; width: 100%; height: 100%; padding: 40px 60px; display: flex; flex-direction: column; justify-content: space-between; }
-    .hud-top { display: flex; justify-content: space-between; font-size: 13px; color: #7fb7ff; text-transform: uppercase; letter-spacing: 2px; }
-    .hud-pill { padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(0, 180, 255, 0.5); background: rgba(0, 80, 140, 0.4); box-shadow: 0 0 12px rgba(0, 180, 255, 0.5); }
-    .center { max-width: 720px; margin-top: 40px; }
-    .logo-main { font-size: 32px; letter-spacing: 4px; text-transform: uppercase; color: #8fd4ff; margin-bottom: 10px; text-shadow: 0 0 12px #00e1ff, 0 0 30px #0077ff; }
-    .headline { font-size: 26px; margin-bottom: 10px; color: #e5f3ff; }
-    .typewriter { font-size: 16px; color: #9acbff; min-height: 24px; margin-bottom: 24px; text-shadow: 0 0 8px rgba(0, 200, 255, 0.6); }
-    .desc { font-size: 14px; color: #7fa7d4; max-width: 520px; line-height: 1.6; margin-bottom: 26px; }
-    .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 20px; }
-    .btn-primary, .btn-secondary { padding: 12px 26px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; border-radius: 999px; border: 1px solid #00c8ff; background: #003b66; color: #e5f7ff; box-shadow: 0 0 18px #00c8ff; cursor: pointer; }
-    .btn-secondary { border-color: #4fa0ff; box-shadow: 0 0 12px #4fa0ff; opacity: 0.9; }
-    .trail-dot { position: fixed; width: 8px; height: 8px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, #00ffff, transparent); opacity: 0.9; transform: translate(-50%, -50%); z-index: 5; animation: trailFade 0.6s linear forwards; }
-    @keyframes trailFade { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(0.2); } }
-  </style>
-</head>
-
-<body>
-  <div class="frame">
-    <canvas id="particles"></canvas>
-    <div class="content">
-      <div class="hud-top">
-        <div class="hud-pill">Slither Mod UI Hub</div>
-        <div>Status: ONLINE</div>
-      </div>
-      <div class="center">
-        <div class="logo-main">BEST SLITHER.IO MODS</div>
-        <div class="headline">best slither.io mod menu for completly free.</div>
-        <div id="typewriter" class="typewriter"></div>
-        <p class="desc">click copy code, then launch slither.io open console and paste code to inject the BSIO Client.</p>
-        <div class="btn-row">
-          <button class="btn-primary" id="launchSlitherBtn">Launch Slither.io</button>
-          <button class="btn-secondary" id="copyCodeBtn">Copy Code</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script id="injectScript" type="text/plain">
-(function() {
-    if (window.__BSIO_CLIENT__) return;
-    window.__BSIO_CLIENT__ = true;
-
-    // --- STYLING ---
-    const s = document.createElement('style');
-    s.textContent = `
-        :root { --bsio-accent: #00e1ff; --bsio-bg: rgba(5, 10, 20, 0.98); }
-        #bsio_loader { position: fixed; inset: 0; background: #000; z-index: 1000000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.8s; }
-        .bsio_bar { width: 200px; height: 4px; background: #111; margin-top: 20px; position: relative; overflow: hidden; }
-        .bsio_progress { position: absolute; height: 100%; width: 0%; background: var(--bsio-accent); animation: bsio_load 2s forwards; }
-        @keyframes bsio_load { to { width: 100%; } }
-
-        #bsio_trigger { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); padding: 10px 25px; background: var(--bsio-bg); border: 1px solid var(--bsio-accent); border-radius: 99px; color: white; cursor: pointer; z-index: 999998; font-family: sans-serif; box-shadow: 0 0 15px var(--bsio-accent); transition: 0.3s; }
-        #bsio_trigger:hover { letter-spacing: 2px; background: var(--bsio-accent); color: #000; }
-
-        #bsio_menu { position: fixed; top: 100px; left: 100px; width: 900px; height: 600px; background: var(--bsio-bg); border: 1px solid rgba(0, 225, 255, 0.3); border-radius: 20px; z-index: 999999; display: flex; font-family: 'Segoe UI', sans-serif; color: white; box-shadow: 0 0 50px rgba(0,0,0,0.8); overflow: hidden; opacity: 0; pointer-events: none; transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s; }
-        #bsio_menu.active { opacity: 1; pointer-events: auto; }
-        #bsio_overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 999997; display: none; backdrop-filter: blur(5px); }
-
-        #bsio_sidebar { width: 200px; background: rgba(0,0,0,0.3); border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; padding: 20px 0; }
-        .bsio_tab { padding: 14px 25px; cursor: pointer; font-size: 13px; color: #666; transition: 0.2s; border-left: 3px solid transparent; text-transform: uppercase; letter-spacing: 1px; }
-        .bsio_tab:hover { color: #fff; background: rgba(255,255,255,0.05); }
-        .tab_active { color: var(--bsio-accent); border-left-color: var(--bsio-accent); background: rgba(0,225,255,0.05); }
-
-        #bsio_content_root { flex: 1; display: flex; flex-direction: column; }
-        #bsio_header { padding: 15px 25px; background: rgba(255,255,255,0.02); display: flex; justify-content: space-between; align-items: center; cursor: move; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        #bsio_grid { flex: 1; padding: 25px; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; align-content: start; }
+    <meta charset="UTF-8">
+    <title>BSIO Client</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
         
-        .bsio_card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; cursor: pointer; font-size: 12px; transition: 0.2s; text-align: center; }
-        .bsio_card:hover { border-color: var(--bsio-accent); background: rgba(0,225,255,0.05); transform: translateY(-2px); }
-        .card_on { border-color: #00ff88; color: #00ff88; box-shadow: 0 0 10px rgba(0,255,136,0.1); }
-        
-        .rgb_anim { animation: rgb_cycle 4s linear infinite; }
-        @keyframes rgb_cycle { 0% { color: #ff0000; border-color: #ff0000; } 33% { color: #00ff00; border-color: #00ff00; } 66% { color: #0000ff; border-color: #0000ff; } 100% { color: #ff0000; border-color: #ff0000; } }
-        .color_dot { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; display: inline-block; margin: 4px; }
-    `;
-    document.head.appendChild(s);
-
-    // --- DOM SETUP ---
-    const loader = document.createElement('div'); loader.id = 'bsio_loader';
-    loader.innerHTML = `<h1 style="color:white; letter-spacing:10px;">BSIO CLIENT</h1><div class="bsio_bar"><div class="bsio_progress"></div></div>`;
-    document.body.appendChild(loader);
-
-    const overlay = document.createElement('div'); overlay.id = 'bsio_overlay';
-    const trigger = document.createElement('div'); trigger.id = 'bsio_trigger'; trigger.innerText = 'OPEN BSIO MOD';
-    const menu = document.createElement('div'); menu.id = 'bsio_menu';
-    menu.innerHTML = `
-        <div id="bsio_sidebar">
-            <div style="padding:0 25px 20px; font-weight:900; color:white; font-size:20px;">BSIO.</div>
-            <div class="bsio_tab tab_active" data-t="0">Combat</div>
-            <div class="bsio_tab" data-t="1">Visuals</div>
-            <div class="bsio_tab" data-t="2">Movement</div>
-            <div class="bsio_tab" data-t="3">World Themes</div>
-            <div class="bsio_tab" data-t="4">Snake Build</div>
-            <div class="bsio_tab" data-t="5">Networking</div>
-            <div class="bsio_tab" data-t="6">Social</div>
-            <div class="bsio_tab" data-t="7">UI Mastery</div>
-            <div class="bsio_tab" data-t="8">Automation</div>
-            <div class="bsio_tab" data-t="9">Experimental</div>
-        </div>
-        <div id="bsio_content_root">
-            <div id="bsio_header"><span>BSIO CLIENT V1.0 - ULTRA</span><span id="bsio_close" style="cursor:pointer;">✕</span></div>
-            <div id="bsio_grid"></div>
-        </div>
-    `;
-    document.body.appendChild(overlay); document.body.appendChild(trigger); document.body.appendChild(menu);
-
-    // --- FEATURE DATA (10 TABS) ---
-    const tabs = [
-        ["NTL Auto-Eater", "Kill Aura (Fake)", "Target Lock", "Smart Dodge", "Circle Bot", "Fast Feed", "Mass Grabber", "Anti-Collision"],
-        ["Neon Glow", "Wireframe", "See-Through", "Food ESP", "Snake ESP", "No Particles", "Leaderboard HUD", "Map HD"],
-        ["Smooth Zoom", "Speed Macro", "Zoom Lock", "Reverse Steering", "Precision Mode", "Boost Lock", "Drift Mode", "Ghost Trail"],
-        ["Dark Void", "Deep Ocean", "Matrix Green", "Cyber Purple", "Toxic Waste", "Mars Red", "Sky Blue", "Snow White"],
-        ["Skin Rotator", "Rainbow Skin", "Invis Skin", "Giant Head", "Skin Builder", "Glow Pulsing", "Cape Toggle", "Pattern Gen"],
-        ["Ping Fixer", "Packet Opt.", "Server Hopper", "IP Joiner", "Regional Sync", "Proxy Mode", "Lag Shield", "Socket Debug"],
-        ["Global Chat", "Emoji Menu", "Team Finder", "Friend Track", "SOS Signal", "Stealth Mode", "Auto-Greet", "Ignore List"],
-        ["Master RGB", "Glass Blur", "Neon Borders", "Custom Font", "50+ UI Colors", "HUD Scale", "Theme Importer", "Menu Sound"],
-        ["Auto-Pilot", "AFK Mode", "Path Finding", "Bot Spawner", "Self-Growth", "Record Run", "Auto-Respawn", "Smart Kill"],
-        ["God Mode (Vis)", "FPS Unlocker", "Dev Console", "Script Inject", "Bypass Ban", "Multi-Account", "Packet Spoof", "Hard Reset"]
-    ];
-
-    function loadTab(index) {
-        const grid = document.getElementById('bsio_grid'); grid.innerHTML = '';
-        if (index == 7) { // UI Mastery (Special)
-            grid.innerHTML = '<div style="grid-column: span 3"><h3>50+ UI Mastery Colors</h3></div>';
-            for(let i=0; i<60; i++) {
-                const dot = document.createElement('div'); dot.className = 'color_dot';
-                const c = `hsl(${i * 6}, 100%, 50%)`; dot.style.background = c;
-                dot.onclick = () => { document.documentElement.style.setProperty('--bsio-accent', c); trigger.style.borderColor = c; trigger.style.boxShadow = `0 0 15px ${c}`; };
-                grid.appendChild(dot);
-            }
-            const rgb = document.createElement('div'); rgb.className = 'bsio_card'; rgb.innerText = "TOGGLE MASTER RGB";
-            rgb.onclick = () => menu.classList.toggle('rgb_anim');
-            grid.appendChild(rgb);
-            return;
+        :root { 
+            --a: #00e1ff; 
+            --bg: #010101; 
+            --p: #080808;
+            --b: rgba(255, 255, 255, 0.03);
+            --font: 'Space Grotesk', sans-serif;
         }
-        tabs[index].forEach(f => {
-            const c = document.createElement('div'); c.className = 'bsio_card'; c.innerText = f;
-            c.onclick = () => c.classList.toggle('card_on');
-            grid.appendChild(c);
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        body { background: var(--bg); color: #fff; height: 100vh; font-family: var(--font); overflow: hidden; display: flex; }
+
+        /* ASTRONOMY BACKGROUND ENGINE */
+        #stars { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+        /* LOADING SCREEN - AAA GRADE */
+        #loader {
+            position: fixed; inset: 0; background: #000; z-index: 99999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .l-box { width: 400px; text-align: center; }
+        .l-title { font-weight: 900; letter-spacing: 15px; font-size: 20px; margin-bottom: 20px; text-shadow: 0 0 20px var(--a); }
+        .l-bar-out { width: 100%; height: 1px; background: #111; position: relative; }
+        .l-bar-in { width: 0%; height: 100%; background: var(--a); box-shadow: 0 0 20px var(--a); transition: 0.1s; }
+        .l-stat { font-family: 'JetBrains Mono'; font-size: 9px; color: #333; margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* WEBSITE LAYOUT - MODERN DENSITY */
+        #sidebar { width: 280px; background: #030303; border-right: 1px solid var(--b); display: flex; flex-direction: column; padding: 50px 30px; }
+        #content { flex: 1; padding: 80px; position: relative; overflow-y: auto; }
+        
+        .nav-link { 
+            padding: 18px 25px; margin-bottom: 10px; border-radius: 4px; cursor: pointer;
+            color: #444; font-weight: 700; font-size: 13px; letter-spacing: 1px; transition: 0.3s;
+            border-left: 0px solid var(--a);
+        }
+        .nav-link:hover { color: #fff; background: rgba(255,255,255,0.01); }
+        .nav-link.active { color: var(--a); border-left: 4px solid var(--a); background: rgba(0, 225, 255, 0.03); }
+
+        /* COLOR PICKER SECTION */
+        .color-config { 
+            position: absolute; top: 40px; right: 40px; background: #0a0a0a; 
+            border: 1px solid var(--b); padding: 20px; border-radius: 8px; 
+            display: flex; flex-direction: column; gap: 10px; box-shadow: 0 20px 40px #000;
+        }
+        .color-config label { font-size: 9px; font-weight: 900; color: #444; letter-spacing: 2px; }
+        .picker-row { display: flex; align-items: center; gap: 15px; }
+        input[type="color"] { background: none; border: none; width: 40px; height: 40px; cursor: pointer; }
+
+        /* PAYLOAD BOX */
+        .payload-card { background: #050505; border: 1px solid var(--b); padding: 40px; border-radius: 12px; max-width: 800px; margin-top: 40px; }
+        .code-preview { 
+            background: #000; padding: 25px; border-radius: 6px; font-family: 'JetBrains Mono'; 
+            font-size: 12px; color: #333; height: 300px; overflow-y: auto; border: 1px solid #111; margin-bottom: 25px;
+        }
+        .btn-copy { 
+            background: var(--a); color: #000; padding: 20px 50px; border: none; 
+            border-radius: 4px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 12px;
+        }
+        .btn-copy:hover { box-shadow: 0 0 40px var(--a); transform: translateY(-2px); }
+
+        /* VIEWS */
+        .view { display: none; }
+        .view.active { display: block; animation: entry 0.8s ease; }
+        @keyframes entry { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="l-box">
+            <div class="l-title">BSIO CLIENT</div>
+            <div class="l-bar-out"><div class="l-bar-in" id="l-bar"></div></div>
+            <div id="l-stat" class="l-stat">LOADING CORE...</div>
+        </div>
+    </div>
+
+    <canvas id="stars"></canvas>
+
+    <div id="sidebar">
+        <div style="font-weight: 900; font-size: 24px; margin-bottom: 60px; color: var(--a);">BSIO</div>
+        <div class="nav-link active" onclick="tab(0)">DASHBOARD</div>
+        <div class="nav-link" onclick="tab(1)">AI ASSISTANT</div>
+        <div class="nav-link" onclick="tab(2)">PLUGINS</div>
+        <div class="nav-link" onclick="tab(3)">SYSTEM</div>
+    </div>
+
+    <div id="content">
+        <div class="color-config">
+            <label>UI CALIBRATION</label>
+            <div class="picker-row">
+                <input type="color" id="site_hex" value="#00e1ff" oninput="updateTheme(this.value)">
+                <span id="hex_label" style="font-family: 'JetBrains Mono'; font-size: 11px;">#00E1FF</span>
+            </div>
+        </div>
+
+        <div id="view0" class="view active">
+            <h1 style="font-size: 60px; font-weight: 900; margin-bottom: 10px;">BSIO <span style="font-weight: 300; opacity: 0.2;">V10.8</span></h1>
+            <p style="color: #444; letter-spacing: 5px; text-transform: uppercase; font-size: 10px;">Military Grade Slither Architecture</p>
+
+            <div class="payload-card">
+                <div class="code-preview" id="payload_view">
+                    // BSIO Client V10.8 Standard
+                    // Initializing Draggable Logic...
+                    // Initializing Rain Engine...
+                    // Initializing Hex Gradient UI...
+                    // Code Length Optimized for 35K Lines Architecture
+                </div>
+                <button class="btn-copy" onclick="copyClient()">COPY BSIO PAYLOAD</button>
+            </div>
+        </div>
+
+        <div id="view1" class="view">
+            <h1>Neural AI</h1>
+            <p style="margin-top: 20px; color: #555;">Integrate automated logic commands into your terminal.</p>
+        </div>
+    </div>
+
+    <script>
+        // 1. LOADING SCREEN
+        let prg = 0;
+        const lBar = document.getElementById('l-bar');
+        const lStat = document.getElementById('l-stat');
+        const stats = ["Allocating Memory...", "Initializing Rain Engine...", "Connecting to Slither.io...", "Parsing Hex Buffers...", "READY"];
+        
+        const load = setInterval(() => {
+            prg += Math.random() * 4;
+            if(prg >= 100) {
+                prg = 100;
+                clearInterval(load);
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }
+            lBar.style.width = prg + '%';
+            lStat.innerText = stats[Math.floor(prg / 25)] || "STABLE";
+        }, 40);
+
+        // 2. ASTRONOMY STARS
+        const c = document.getElementById('stars');
+        const ctx = c.getContext('2d');
+        let dots = [];
+        function initStars() {
+            c.width = window.innerWidth; c.height = window.innerHeight;
+            dots = Array(200).fill(0).map(() => ({ x: Math.random()*c.width, y: Math.random()*c.height, s: Math.random()*2, v: Math.random()*3+1 }));
+        }
+        function drawStars() {
+            ctx.clearRect(0,0,c.width,c.height);
+            ctx.fillStyle = "#fff";
+            dots.forEach(d => {
+                ctx.beginPath(); ctx.arc(d.x, d.y, d.s, 0, Math.PI*2); ctx.fill();
+                d.y += d.v; if(d.y > c.height) d.y = -10;
+            });
+            requestAnimationFrame(drawStars);
+        }
+        initStars(); drawStars();
+
+        // 3. TAB LOGIC
+        function tab(n) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById('view'+n).classList.add('active');
+            document.querySelectorAll('.nav-link')[n].classList.add('active');
+        }
+
+        // 4. THEME SYNC
+        function updateTheme(val) {
+            document.documentElement.style.setProperty('--a', val);
+            document.getElementById('hex_label').innerText = val.toUpperCase();
+        }
+
+        // 5. THE BEAST PAYLOAD
+        function copyClient() {
+            const accent = getComputedStyle(document.documentElement).getPropertyValue('--a').trim();
+            const clientCode = `(function() {
+    if (window.__BSIO__) return;
+    window.__BSIO__ = true;
+    const accent = "${accent}";
+    const style = document.createElement('style');
+    style.textContent = \`
+        :root { --a: \${accent}; }
+        body.bs_blur > *:not(#b_menu):not(#b_rain):not(#bs_l):not(#b_trig):not(.b_sub) { filter: blur(30px) brightness(0.2); transition: 0.8s; }
+        
+        #b_menu { position: fixed; top: 100px; left: 100px; width: 620px; height: 450px; background: rgba(0,0,0,0.98); border: 1px solid var(--a); z-index: 2147483645; display: none; flex-direction: column; font-family: 'Space Grotesk'; color: #fff; border-radius: 8px; box-shadow: 0 0 40px #000, 0 0 20px var(--a); overflow: hidden; }
+        #b_head { background: #000; padding: 15px; cursor: move; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 900; letter-spacing: 2px; }
+        
+        #b_tabs { display: flex; background: #000; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .b_t { padding: 12px 20px; cursor: pointer; font-size: 10px; color: #444; text-transform: uppercase; }
+        .b_t.act { color: var(--a); text-shadow: 0 0 10px var(--a); }
+
+        #b_grid { flex: 1; padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; overflow-y: auto; }
+        .mod { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 4px; font-size: 11px; }
+        
+        .sw { width: 34px; height: 18px; background: #111; border-radius: 20px; position: relative; cursor: pointer; transition: 0.3s; }
+        .sw.on { background: var(--a); box-shadow: 0 0 15px var(--a); }
+        .sw:after { content: ''; position: absolute; width: 12px; height: 12px; background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: 0.3s; }
+        .sw.on:after { left: 19px; }
+
+        /* HEX GRADIENT SUB-WINDOW */
+        .b_sub { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; background: #050505; border: 1px solid var(--a); padding: 25px; z-index: 2147483647; display: none; flex-direction: column; border-radius: 12px; box-shadow: 0 0 100px #000; text-align: center; }
+        
+        #b_rain { position: fixed; inset: 0; pointer-events: none; z-index: 2147483641; display: none; opacity: 0.3; }
+        #b_trig { position: fixed; bottom: 20px; right: 20px; padding: 10px 25px; background: #000; border: 1px solid var(--a); color: var(--a); cursor: pointer; font-weight: 900; z-index: 999999; border-radius: 4px; box-shadow: 0 0 15px var(--a); }
+    \`;
+    document.head.appendChild(style);
+
+    // RAIN ENGINE
+    const r = document.createElement('canvas'); r.id = 'b_rain'; document.body.appendChild(r);
+    const rx = r.getContext('2d'); let rD = [];
+    function r_init(){ r.width=window.innerWidth; r.height=window.innerHeight; rD = Array(100).fill(0).map(()=>({x:Math.random()*r.width, y:Math.random()*r.height, s:Math.random()*15+5})); }
+    function r_draw(){ if(r.style.display==='none')return; rx.clearRect(0,0,r.width,r.height); rx.strokeStyle=accent; rD.forEach(d=>{ rx.beginPath(); rx.moveTo(d.x, d.y); rx.lineTo(d.x, d.y+10); rx.stroke(); d.y+=d.s; if(d.y>r.height)d.y=-20; }); requestAnimationFrame(r_draw); }
+
+    // MENU UI
+    const m = document.createElement('div'); m.id = 'b_menu';
+    m.innerHTML = '<div id="b_head">BSIO CLIENT <span id="open_sub" style="font-size:9px; cursor:pointer; opacity:0.5;">[ THEME ]</span></div><div id="b_tabs"></div><div id="b_grid"></div>';
+    document.body.appendChild(m);
+
+    const sub = document.createElement('div'); sub.className = 'b_sub';
+    sub.innerHTML = '<div style="font-size:11px; font-weight:900; margin-bottom:15px;">HEX CALIBRATION ENGINE</div><input type="color" id="h_v" style="width:100%; height:50px; background:none; border:none; cursor:pointer;"><button id="h_s" style="margin-top:20px; padding:15px; background:var(--a); color:#000; border:none; border-radius:4px; font-weight:900; cursor:pointer;">UPDATE SYSTEM</button>';
+    document.body.appendChild(sub);
+
+    const tabs = ["Combat", "Visuals", "World", "Network", "Social", "AI"];
+    const mods = {
+        "Combat": ["Kill Aura", "Reach", "Auto-Eat", "Dodge", "Lock", "Anti-KB"],
+        "Visuals": ["ESP", "Glow", "Tracers", "X-Ray", "No Fog", "Skins"],
+        "World": ["Nuke", "Time", "Weather", "Seeds", "Zoom", "Particles"],
+        "Network": ["Lag", "Ping", "Hop", "Snag", "Packet", "Proxy"],
+        "Social": ["Spam", "Chat", "Friends", "Emoji", "Rank", "Stat"],
+        "AI": ["Auto-Bot", "Farm", "Path", "Avoid", "Neural", "Log"]
+    };
+
+    function load(t) {
+        const g = document.getElementById('b_grid'); g.innerHTML = '';
+        mods[t].forEach(f => {
+            g.innerHTML += \`<div class="mod"><span>\${f.toUpperCase()}</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>\`;
         });
     }
 
-    // --- LOGIC ---
-    setTimeout(() => { loader.style.opacity = '0'; setTimeout(()=>loader.remove(), 800); }, 2000);
-    trigger.onclick = () => { menu.classList.add('active'); overlay.style.display = 'block'; };
-    document.getElementById('bsio_close').onclick = () => { menu.classList.remove('active'); overlay.style.display = 'none'; };
-    overlay.onclick = () => document.getElementById('bsio_close').click();
-
-    document.querySelectorAll('.bsio_tab').forEach((t, i) => t.onclick = function() {
-        document.querySelectorAll('.bsio_tab').forEach(x => x.classList.remove('tab_active'));
-        this.classList.add('tab_active'); loadTab(i);
+    tabs.forEach((n, i) => {
+        const b = document.createElement('div'); b.className = 'b_tab' + (i==0?' act':''); b.innerText = n;
+        b.className = 'b_t' + (i==0?' act':'');
+        b.onclick = () => { document.querySelectorAll('.b_t').forEach(x=>x.classList.remove('act')); b.classList.add('act'); load(n); };
+        document.getElementById('b_tabs').appendChild(b);
     });
 
-    // DRAG LOGIC
-    let isD=false, ox, oy;
-    document.getElementById('bsio_header').onmousedown = e => { isD=true; ox=e.clientX-menu.offsetLeft; oy=e.clientY-menu.offsetTop; };
-    document.onmousemove = e => { if(isD) { menu.style.left=(e.clientX-ox)+'px'; menu.style.top=(e.clientY-oy)+'px'; } };
-    document.onmouseup = () => isD=false;
+    let drg=false, ox, oy;
+    document.getElementById('b_head').onmousedown = e => { drg=true; ox=e.clientX-m.offsetLeft; oy=e.clientY-m.offsetTop; };
+    document.onmousemove = e => { if(drg){ m.style.left=(e.clientX-ox)+'px'; m.style.top=(e.clientY-oy)+'px'; } };
+    document.onmouseup = () => drg=false;
 
-    loadTab(0);
-})();
-  </script>
+    const tr = document.createElement('div'); tr.id='b_trig'; tr.innerText='BSIO'; document.body.appendChild(tr);
+    tr.onclick = () => { 
+        const isV = m.style.display==='flex';
+        m.style.display = isV?'none':'flex'; 
+        r.style.display = isV?'none':'block';
+        document.body.classList.toggle('bs_blur');
+        if(!isV) { r_init(); r_draw(); }
+    };
 
-  <script>
-    /* --- YOUR ORIGINAL WEBSITE JS - UNTOUCHED --- */
-    const twText = "ready to make little timmys cry???";
-    let twIndex = 0;
-    function typeWriter() { document.getElementById("typewriter").textContent = twText.slice(0, twIndex++); if (twIndex <= twText.length) setTimeout(typeWriter, 45); }
-    setTimeout(typeWriter, 400);
+    document.getElementById('open_sub').onclick = () => sub.style.display='flex';
+    document.getElementById('h_s').onclick = () => { document.documentElement.style.setProperty('--a', document.getElementById('h_v').value); sub.style.display='none'; };
 
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    let w, h;
-    function resizeCanvas() { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; }
-    resizeCanvas(); window.addEventListener("resize", resizeCanvas);
-
-    const particles = Array.from({ length: 80 }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, r: Math.random() * 2 + 1, a: Math.random() * 0.6 + 0.2 }));
-    function drawParticles() { ctx.clearRect(0, 0, w, h); ctx.fillStyle = "#00e1ff"; particles.forEach(p => { ctx.globalAlpha = p.a; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); p.x += p.vx; p.y += p.vy; if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10; if (p.y < -10) p.y = h + 10; if (p.y > h + 10) p.y = -10; }); requestAnimationFrame(drawParticles); }
-    drawParticles();
-
-    window.addEventListener("mousemove", e => { const d = document.createElement("div"); d.className = "trail-dot"; d.style.left = e.clientX + "px"; d.style.top = e.clientY + "px"; document.body.appendChild(d); setTimeout(() => d.remove(), 600); });
-    document.getElementById("launchSlitherBtn").onclick = () => { window.open("https://slither.io", "_blank"); };
-    document.getElementById("copyCodeBtn").onclick = () => { const scriptContent = document.getElementById("injectScript").textContent.trim(); navigator.clipboard.writeText(scriptContent).then(() => { alert("BSIO Client Copied!"); }); };
-  </script>
+    load("Combat");
+})();`;
+            navigator.clipboard.writeText(clientCode);
+            alert("BSIO Client Payload Copied.");
+        }
+    </script>
 </body>
 </html>
